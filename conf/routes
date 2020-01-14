@@ -1,9 +1,8 @@
 
 GET      /                              controllers.HomeController.index
-GET      /books                      controllers.BookController.index
-GET      /books/create                  controllers.BookController.create()
+GET      /books                         controllers.BookController.index
+POST     /books/create                  controllers.BookController.create()
 GET      /books/:id                     controllers.BookController.show(id : Integer)
 GET      /books/edit/:id                controllers.BookController.edit(id : Integer)
 POST     /books/edit                    controllers.BookController.update()
-POST     /books/create                  controllers.BookController.save()
 GET      /books/delete/:id              controllers.BookController.destroy(id : Integer)

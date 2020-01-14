@@ -8,6 +8,10 @@
     </head>
     <body>
     @message
+        <form action="@routes.BookController.create()" method="post">
+           <input name="name" type="text">
+            <button>Add Book</button>
+        </form>
     </body>
 
 </html>

@@ -1,9 +1,10 @@
 package controllers
-import models.Book
+import models.{Book, DB}
 import play.api._
 import javax.inject._
 import play.api.data.Form
-import play.api.data.Form._
+import play.api.data.Forms.mapping
+import play.api.data.Forms._
 import play.api.mvc._
 
 class BookController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
@@ -11,9 +12,16 @@ class BookController @Inject()(cc: ControllerComponents) extends AbstractControl
   def index = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.book("hello lily"))
   }
+  val  bookForm : Form[Book] = Form{
+    mapping(
+      "name" -> text
+    )(Book.apply)(Book.unapply)
+  }
 
   def create() = Action { implicit request: Request[AnyContent] =>
-    Ok("dsdsdsdsd")
+    val book = bookForm.bindFromRequest.get
+    DB.save(book)
+    Redirect(routes.BookController.index())
   }
   def show(id : Integer) = TODO
   def edit(id : Integer) = TODO
